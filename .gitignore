@@ -2,3 +2,6 @@
 *.xlsx
 covid_19.pbix
 rainfall-deforestation.ipynb
+clone/
+me.txt
+.vscode/

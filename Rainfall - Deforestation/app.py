@@ -53,7 +53,8 @@ figAvgDef = px.choropleth(
     color="deforestation(in Ha)",
     hover_name="place",
     scope="asia",
-    color_continuous_scale='deep')
+    color_continuous_scale='reds',
+    template='plotly_dark')
 
 figAvgDef.update_geos(fitbounds="locations")
 figAvgDef.update_layout(title_text='Average Deforestation by States')
@@ -65,7 +66,8 @@ figAvgRain = px.choropleth(
     color="rainfall(in mm)",
     hover_name='place',
     scope='asia',
-    color_continuous_scale='matter')
+    color_continuous_scale='blues',
+    template='plotly_dark')
 
 figAvgRain.update_geos(fitbounds="locations")
 figAvgRain.update_layout(title_text='Average Rainfall by States')
@@ -79,7 +81,8 @@ scatterplotRain = px.scatter(
     color="State",
     size='Year',
     hover_data=['State'],
-    height=600
+    height=600,
+    template='plotly_dark'
 )
 scatterplotRain.update_traces(textposition='top center')
 scatterplotRain.update_layout(title_text='Annual Rainfall By States')
@@ -91,7 +94,8 @@ scatterplotDef = px.scatter(
     color="State",
     size='Year',
     hover_data=['State'],
-    height=600
+    height=600,
+    template='plotly_dark'
 )
 scatterplotDef.update_traces(textposition='top center')
 scatterplotDef.update_layout(title_text='Annual Deforestation By States')
@@ -100,21 +104,21 @@ scatterplotDef.update_layout(title_text='Annual Deforestation By States')
 fig = go.Figure(data=[
     go.Bar(name='Average Rainfall',
            x=df_avg['place'], y=df_avg['rainfall(in mm)']),
-    go.Bar(name='Average Deforestation',
-           x=df_avg['place'], y=df_avg['deforestation(in Ha)'])
+    go.Bar(name='Average Deforestation/100 (Ha)',
+           x=df_avg['place'], y=df_avg['deforestation(in Ha)']/100)
 ])
 fig.update_layout(barmode='group')
 fig.update_layout(title_text='Rainfall and Deforestation by States')
 
 app.layout = html.Div(children=[
-    html.H1(children='Rainfall-Deforestation'),
+    html.H1(children='RAINFALL-DEFORESTATION DASHBOARD',style={'color': 'white', 'text-align':'center', 'font-family':'"Georgia", serif'}),
     dcc.Dropdown(id='slct_year',
                  options=[
                      {"label": year, "value": year} for year in years
                  ],
                  multi=False,
                  value=2005,
-                 style={"width": "40%"}
+                 style={"width": "40%", 'margin-left':'50px'}
                  ),
     html.Div(id='output_container', children=[]),
 
@@ -173,7 +177,7 @@ app.layout = html.Div(children=[
         dcc.Graph(id='rain_def', figure=fig)
     ], className="row")
 
-])
+], style={'background-color':'black'})
 
 
 @app.callback(
@@ -200,7 +204,8 @@ def update_graph(option_slctd):
         scope='asia',
         hover_name="State",
         hover_data=['State'],
-        color_continuous_scale='deep'
+        color_continuous_scale='blues',
+        template='plotly_dark'
     )
     figRain.update_geos(fitbounds="locations", visible=False)
     figRain.update_layout(title_text='Annual Rainfall by States')
@@ -214,7 +219,8 @@ def update_graph(option_slctd):
         scope='asia',
         hover_name="State",
         hover_data=['State'],
-        color_continuous_scale='matter'
+        color_continuous_scale='reds',
+        template='plotly_dark'
     )
     figDef.update_geos(fitbounds="locations", visible=False)
     figDef.update_layout(title_text='Annual Deforestation by States')

@@ -108,10 +108,10 @@ fig = go.Figure(data=[
            x=df_avg['place'], y=df_avg['deforestation(in Ha)']/100)
 ])
 fig.update_layout(barmode='group')
-fig.update_layout(title_text='Rainfall and Deforestation by States')
+fig.update_layout(title_text='Average Rainfall and Deforestation by States')
 
 app.layout = html.Div(children=[
-    html.H1(children='RAINFALL-DEFORESTATION DASHBOARD',style={'color': 'white', 'text-align':'center', 'font-family':'"Georgia", serif'}),
+    html.H1(children='RAINFALL-DEFORESTATION DASHBOARD',style={'color': 'white', 'text-align':'center', 'font-family':'"Georgia", serif', 'margin-top':'15px'}),
     dcc.Dropdown(id='slct_year',
                  options=[
                      {"label": year, "value": year} for year in years
@@ -177,7 +177,7 @@ app.layout = html.Div(children=[
         dcc.Graph(id='rain_def', figure=fig)
     ], className="row")
 
-], style={'background-color':'black'})
+], style={'background-color':'black', 'margin':'-10px'})
 
 
 @app.callback(

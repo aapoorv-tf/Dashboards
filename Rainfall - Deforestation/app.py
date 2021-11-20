@@ -111,7 +111,7 @@ fig.update_layout(barmode='group')
 fig.update_layout(title_text='Average Rainfall and Deforestation by States')
 
 app.layout = html.Div(children=[
-    html.H1(children='RAINFALL-DEFORESTATION DASHBOARD',style={'color': 'white', 'text-align':'center', 'font-family':'"Georgia", serif', 'margin-top':'15px'}),
+    html.H1(children='RAINFALL-DEFORESTATION DASHBOARD',style={'color': 'white', 'text-align':'center', 'font-family':'system-ui', 'padding-top':'20px'}),
     dcc.Dropdown(id='slct_year',
                  options=[
                      {"label": year, "value": year} for year in years

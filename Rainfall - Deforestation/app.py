@@ -57,7 +57,7 @@ figAvgDef = px.choropleth(
     template='plotly_dark')
 
 figAvgDef.update_geos(fitbounds="locations")
-figAvgDef.update_layout(title_text='Average Deforestation by States')
+figAvgDef.update_layout(title_text='Average Deforestation(in Ha) by States')
 
 figAvgRain = px.choropleth(
     df_avg,
@@ -70,7 +70,7 @@ figAvgRain = px.choropleth(
     template='plotly_dark')
 
 figAvgRain.update_geos(fitbounds="locations")
-figAvgRain.update_layout(title_text='Average Rainfall by States')
+figAvgRain.update_layout(title_text='Average Rainfall(in mm) by States')
 
 
 # Scatter plots of Rainfall and Deforestation Year wise
@@ -85,7 +85,7 @@ scatterplotRain = px.scatter(
     template='plotly_dark'
 )
 scatterplotRain.update_traces(textposition='top center')
-scatterplotRain.update_layout(title_text='Annual Rainfall By States')
+scatterplotRain.update_layout(title_text='Annual Rainfall(in mm) By States')
 
 scatterplotDef = px.scatter(
     data_frame=df,
@@ -98,13 +98,13 @@ scatterplotDef = px.scatter(
     template='plotly_dark'
 )
 scatterplotDef.update_traces(textposition='top center')
-scatterplotDef.update_layout(title_text='Annual Deforestation By States')
+scatterplotDef.update_layout(title_text='Annual Deforestation(in Ha) By States')
 
 # Rainfall and Deforestation by States using Bar chart
 fig = go.Figure(data=[
-    go.Bar(name='Average Rainfall',
+    go.Bar(name='Average Rainfall (mm)',
            x=df_avg['place'], y=df_avg['rainfall(in mm)']),
-    go.Bar(name='Average Deforestation/100 (Ha)',
+    go.Bar(name='Average Deforestation (Ha/100)',
            x=df_avg['place'], y=df_avg['deforestation(in Ha)']/100)
 ])
 fig.update_layout(barmode='group')
@@ -208,7 +208,7 @@ def update_graph(option_slctd):
         template='plotly_dark'
     )
     figRain.update_geos(fitbounds="locations", visible=False)
-    figRain.update_layout(title_text='Annual Rainfall by States')
+    figRain.update_layout(title_text='Annual Rainfall(in mm) by States')
 
     # annual deforestation
     figDef = px.choropleth(
@@ -223,7 +223,7 @@ def update_graph(option_slctd):
         template='plotly_dark'
     )
     figDef.update_geos(fitbounds="locations", visible=False)
-    figDef.update_layout(title_text='Annual Deforestation by States')
+    figDef.update_layout(title_text='Annual Deforestation(in Ha) by States')
     return container, figRain, figDef
 
 
